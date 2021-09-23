@@ -14,4 +14,11 @@ router.post('artists.create', '/', async (ctx) => {
   ctx.redirect(ctx.router.url('authors.new'));
 });
 
+router.get('artists.list', '/', async (ctx) => {
+  const artists = await ctx.orm.artist.findAll();
+  await ctx.render('artists/index', {
+    artists,
+  });
+});
+
 module.exports = router;

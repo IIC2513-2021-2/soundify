@@ -1,0 +1,23 @@
+<h2>Artists</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Origin</th>
+      <th>Genres</th>
+      <th>Formed At</th>
+      <th>Members</th>
+    </tr>
+    <tbody>
+      <% artists.forEach((artist) => { %>
+        <tr>
+          <td><%= artist.name %></td>
+          <td><%= artist.origin %></td>
+          <td><%= artist.genres %></td>
+          <td><%= artist.formedAt %></td>
+          <td><%= artist.members %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </thead>
+</table>
