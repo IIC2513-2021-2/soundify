@@ -11,6 +11,7 @@ router.param('id', async (id, ctx, next) => {
 router.get('artists.new', '/new', async (ctx) => {
   await ctx.render('artists/new', {
     submitArtistPath: ctx.router.url('artists.create'),
+    artistsPath: ctx.router.url('artists.list'),
   });
 });
 
@@ -24,6 +25,8 @@ router.get('artists.list', '/', async (ctx) => {
   const artists = await ctx.orm.artist.findAll();
   await ctx.render('artists/index', {
     artists,
+    artistPath: (id) => ctx.router.url('artists.show', { id }),
+    newArtistPath: ctx.router.url('artists.new'),
   });
 });
 
@@ -31,6 +34,7 @@ router.get('artists.show', '/:id', async (ctx) => {
   const { artist } = ctx.state;
   await ctx.render('artists/show', {
     artist,
+    artistsPath: ctx.router.url('artists.list'),
   });
 });
 

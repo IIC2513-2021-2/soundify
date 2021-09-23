@@ -8,6 +8,7 @@
       <th>Genres</th>
       <th>Formed At</th>
       <th>Members</th>
+      <th></th>
     </tr>
     <tbody>
       <% artists.forEach((artist) => { %>
@@ -17,8 +18,10 @@
           <td><%= artist.genres %></td>
           <td><%= artist.formedAt %></td>
           <td><%= artist.members %></td>
+          <td><a href="<%= artistPath(artist.id) %>">View more</a></td>
         </tr>
       <% }) %>
     </tbody>
   </thead>
 </table>
+<a href="<%= newArtistPath %>">New artist</a>
