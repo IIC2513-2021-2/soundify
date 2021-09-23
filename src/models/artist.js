@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     origin: DataTypes.STRING,
     genres: DataTypes.STRING,
-    formedAt: DataTypes.INTEGER
+    formedAt: DataTypes.INTEGER,
+    members: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'artist',
