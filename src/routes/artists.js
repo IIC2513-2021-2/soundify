@@ -18,7 +18,7 @@ router.get('artists.new', '/new', async (ctx) => {
 router.post('artists.create', '/', async (ctx) => {
   const artist = ctx.orm.artist.build(ctx.request.body);
   await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
-  ctx.redirect(ctx.router.url('authors.new'));
+  ctx.redirect(ctx.router.url('artists.list'));
 });
 
 router.get('artists.list', '/', async (ctx) => {
