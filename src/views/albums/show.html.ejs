@@ -1,8 +1,6 @@
-<a href="<%= artistsPath %>">Back</a>
-<h2><%= artist.name %></h2>
-<h3>Origin: <%= artist.origin %></h3>
-<h3>Genres: <%= artist.genres %></h3>
-<h3>Formed at: <%= artist.formedAt %></h3>
-<% if (artist.members) { %>
-<h3>Members: <%= artist.members %></h3>
-<% } %>
+<a href="<%= albumsPath %>">Back</a>
+<h2><%= album.name %></h2>
+<h3>Artist: <%= album.id_artist %></h3>
+<h3>PublishedAt: <%= album.publishedAt %></h3>
+<h3>Cover: <%= album.cover %></h3>
+

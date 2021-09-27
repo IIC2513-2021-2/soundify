@@ -1,25 +1,17 @@
-<a href="<%= artistsPath %>">Back</a>
-<h2>New artist</h2>
-<form action="<%= submitArtistPath %>" method="POST">
+<a href="<%= albumPath %>">Back</a>
+<h2>New album</h2>
+<form action="<%= submitAlbumPath %>" method="POST">
   <div>
     <label for="name">Name</label>
     <input type="text" name="name" id="name" />
   </div>
   <div>
-    <label for="origin">Origin</label>
-    <input type="text" name="origin" id="origin" />
+    <label for="publishedAt">PublishedAt</label>
+    <input type="text" name="publishedAt" id="publishedAt" />
   </div>
   <div>
-    <label for="genres">Genres</label>
-    <input type="text" name="genres" id="genres" />
+    <label for="cover">Cover</label>
+    <input type="text" name="cover" id="cover" />
   </div>
-  <div>
-    <label for="formedAt">Formed at</label>
-    <input type="number" name="formedAt" id="formedAt" />
-  </div>
-  <div>
-    <label for="members">Members (if it is a band)</label>
-    <input type="text" name="members" id="members" />
-  </div>
-  <input type="submit" value="Add new artist" />
+  <input type="submit" value="Add new album" />
 </form>
