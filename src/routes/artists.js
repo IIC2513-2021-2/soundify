@@ -9,7 +9,9 @@ router.param('id', async (id, ctx, next) => {
 });
 
 router.get('artists.new', '/new', async (ctx) => {
+  const artist = ctx.orm.artist.build();
   await ctx.render('artists/new', {
+    artist,
     submitArtistPath: ctx.router.url('artists.create'),
     artistsPath: ctx.router.url('artists.list'),
   });
@@ -17,8 +19,17 @@ router.get('artists.new', '/new', async (ctx) => {
 
 router.post('artists.create', '/', async (ctx) => {
   const artist = ctx.orm.artist.build(ctx.request.body);
-  await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
-  ctx.redirect(ctx.router.url('artists.list'));
+  try {
+    await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
+    ctx.redirect(ctx.router.url('artists.list'));
+  } catch (ValidationError) {
+    await ctx.render('artists/new', {
+      artist,
+      errors: ValidationError.errors,
+      submitAuthorPath: ctx.router.url('artists.create'),
+      artistsPath: ctx.router.url('artists.list'),
+    });
+  }
 });
 
 router.get('artists.list', '/', async (ctx) => {
