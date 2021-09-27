@@ -22,9 +22,13 @@ router.post('artists.create', '/', async (ctx) => {
 });
 
 router.get('artists.list', '/', async (ctx) => {
-  const artists = await ctx.orm.artist.findAll();
+  // const artists = await ctx.orm.artist.findAll();
+  // const albums = await Promise.all(artists.map((artist) => artist.getAlbums()));
+  const artists = await ctx.orm.artist.findAll({ include: ctx.orm.album });
+  console.log(artists[0].albums[0]);
   await ctx.render('artists/index', {
     artists,
+    // albums,
     artistPath: (id) => ctx.router.url('artists.show', { id }),
     newArtistPath: ctx.router.url('artists.new'),
   });
@@ -32,8 +36,11 @@ router.get('artists.list', '/', async (ctx) => {
 
 router.get('artists.show', '/:id', async (ctx) => {
   const { artist } = ctx.state;
+  // const albums = await ctx.orm.album.findAll({ where: { artistId: artist.id } });
+  const albums = await artist.getAlbums();
   await ctx.render('artists/show', {
     artist,
+    albums,
     artistsPath: ctx.router.url('artists.list'),
   });
 });

@@ -8,6 +8,7 @@
       <th>Genres</th>
       <th>Formed At</th>
       <th>Members</th>
+      <th>Albúm 1</th>
       <th></th>
     </tr>
     <tbody>
@@ -18,6 +19,7 @@
           <td><%= artist.genres %></td>
           <td><%= artist.formedAt %></td>
           <td><%= artist.members %></td>
+          <td><%= artist.albums[0].name %></td>
           <td><a href="<%= artistPath(artist.id) %>">View more</a></td>
         </tr>
       <% }) %>
