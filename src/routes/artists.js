@@ -26,7 +26,7 @@ router.post('artists.create', '/', async (ctx) => {
     await ctx.render('artists/new', {
       artist,
       errors: ValidationError.errors,
-      submitAuthorPath: ctx.router.url('artists.create'),
+      submitArtistPath: ctx.router.url('artists.create'),
       artistsPath: ctx.router.url('artists.list'),
     });
   }

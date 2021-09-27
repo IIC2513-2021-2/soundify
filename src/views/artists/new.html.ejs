@@ -1,25 +1,37 @@
 <a href="<%= artistsPath %>">Back</a>
 <h2>New artist</h2>
+<div>
+  <% if (locals.errors) { %>
+    Tienes que arreglar los siguientes errores:
+    <ul>
+      <% errors.forEach(error => { %>
+        <li><%= error.message %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+
 <form action="<%= submitArtistPath %>" method="POST">
   <div>
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" />
+    <input type="text" name="name" id="name" value="<%= artist.name %>"/>
   </div>
   <div>
     <label for="origin">Origin</label>
-    <input type="text" name="origin" id="origin" />
+    <input type="text" name="origin" id="origin" value="<%= artist.origin %>"/>
   </div>
   <div>
     <label for="genres">Genres</label>
-    <input type="text" name="genres" id="genres" />
+    <input type="text" name="genres" id="genres" value="<%= artist.genres %>"/>
   </div>
   <div>
     <label for="formedAt">Formed at</label>
-    <input type="number" name="formedAt" id="formedAt" />
+    <input type="number" name="formedAt" id="formedAt" value="<%= artist.formedAt %>"/>
   </div>
   <div>
     <label for="members">Members (if it is a band)</label>
-    <input type="text" name="members" id="members" />
+    <input type="text" name="members" id="members" value="<%= artist.members %>"/>
   </div>
   <input type="submit" value="Add new artist" />
 </form>
