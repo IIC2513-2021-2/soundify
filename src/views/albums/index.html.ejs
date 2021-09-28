@@ -1,0 +1,25 @@
+<a href="/">Back</a>
+<h2>Album</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>PublishedAt</th>
+      <th>Cover</th>
+      <th></th>
+    </tr>
+    <tbody>
+      <% albums.forEach((album) => { %>
+        <tr>
+          <td><%= album.name %></td>
+          <td><%= album.artistId %></td>
+          <td><%= album.publishedAt %></td>
+          <td><%= album.cover %></td>
+          <td><a href="<%= albumPath(album.id) %>">View more</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </thead>
+</table>
+<a href="<%= newAlbumPath %>">New album</a>

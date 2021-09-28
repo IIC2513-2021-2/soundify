@@ -1,0 +1,17 @@
+<a href="<%= albumPath %>">Back</a>
+<h2>New album</h2>
+<form action="<%= submitAlbumPath %>" method="POST">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" />
+  </div>
+  <div>
+    <label for="publishedAt">PublishedAt</label>
+    <input type="text" name="publishedAt" id="publishedAt" />
+  </div>
+  <div>
+    <label for="cover">Cover</label>
+    <input type="text" name="cover" id="cover" />
+  </div>
+  <input type="submit" value="Add new album" />
+</form>
