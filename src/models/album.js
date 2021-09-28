@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     cover: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'model',
+    modelName: 'album',
   });
   return album;
 };
