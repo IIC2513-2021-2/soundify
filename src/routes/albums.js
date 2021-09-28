@@ -26,10 +26,8 @@ router.post('albums.create', '/', async (ctx) => {
 
 router.get('albums.list', '/', async (ctx) => {
   const albums = await ctx.orm.album.findAll();
-  const artistList = await ctx.orm.artist.findAll()
   await ctx.render('albums/index', {
     albums,
-    artistList,
     albumPath: (id) => ctx.router.url('albums.show', { id }),
     newAlbumPath: ctx.router.url('albums.new'),
   });
