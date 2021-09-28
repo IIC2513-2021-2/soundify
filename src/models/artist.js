@@ -32,19 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [[
-          'Punk',
-          'Rock',
-          'Folk',
-          'Rap',
-          'Reggaeton',
-          'Jazz',
-          'Classical',
-          'Electronic',
-          'Pop',
-          'Country',
-          'EDM',
-          'Swing']],
+        notEmpty: true,
       },
     },
     formedAt: {
