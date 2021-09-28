@@ -3,7 +3,7 @@
 <form action="<%= submitAlbumPath %>" method="POST">
   <div>
     <label for="artistId">Artist</label>
-    <select name="artistId" id="authorId">
+    <select name="artistId" id="artistId">
         <% artistList.forEach((artist) => { %>
             <option value="<%= artist.id %>">
                 <%= artist.name %>

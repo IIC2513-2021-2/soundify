@@ -32,10 +32,11 @@ router.get('artists.list', '/', async (ctx) => {
 
 router.get('artists.show', '/:id', async (ctx) => {
   const { artist } = ctx.state;
+  //const albumList = await ctx.orm.album.findAll()
   //-----------//
   const albumList = await ctx.orm.album.findAll({where: {artistId: artist.id}})
   //-----------//
-  console.log(artistList)
+  console.log(albumList)
   await ctx.render('artists/show', {
     artist,
     artistsPath: ctx.router.url('artists.list'),
