@@ -17,7 +17,7 @@ router.get('albums.new', '/new', async (ctx) => {
 
 router.post('albums.create', '/', async (ctx) => {
   const album = ctx.orm.album.build(ctx.request.body);
-  await album.save({ fields: ['name', 'id_artist', 'publishedAt', 'cover'] });
+  await album.save({ fields: ['name', 'artistId', 'publishedAt', 'cover'] });
   ctx.redirect(ctx.router.url('albums.list'));
 });
 
