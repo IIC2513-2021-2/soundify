@@ -14,11 +14,39 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   artist.init({
-    name: DataTypes.STRING,
-    origin: DataTypes.STRING,
-    genres: DataTypes.STRING,
-    formedAt: DataTypes.INTEGER,
-    members: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    origin: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    genres: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    formedAt: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1700,
+        max: 2021,
+      },
+    },
+    members: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'artist',
