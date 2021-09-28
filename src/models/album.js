@@ -1,14 +1,26 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const album = sequelize.define('album', {
-    id_artist: DataTypes.INTEGER,
+  class album extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
+  album.init({
+    artistId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     publishedAt: DataTypes.INTEGER,
     cover: DataTypes.STRING,
-  }, {});
-
-  album.associate = function associate() {
-    // associations can be defined here. This method receives a models parameter.
-  };
-
+  }, {
+    sequelize,
+    modelName: 'model',
+  });
   return album;
 };
