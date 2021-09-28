@@ -1,3 +1,4 @@
+
 const KoaRouter = require('koa-router');
 
 const router = new KoaRouter();
@@ -11,7 +12,6 @@ async function getArtist(ctx, next){
 
 router.get('albums_for_artists.new', '/new', getArtist, async (ctx) => {
   const {artist} = ctx.state;
-  console.log(artist.id.toString())
   const album = ctx.orm.album.build()
   await ctx.render('albums/new_for_artists', {
     album,
@@ -23,7 +23,6 @@ router.post('albums_for_artists.create', '/', getArtist, async (ctx) => {
   const {artist} = ctx.state;
   const album = ctx.orm.album.build(ctx.request.body);
   album.artistId = artist.id;
-  console.log(album)
   await album.save({ fields: ['name','artistId', 'publishedAt', 'cover'] });
   ctx.redirect(ctx.router.url('artists.show', {id: artist.id}));
 });
