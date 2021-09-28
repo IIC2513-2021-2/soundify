@@ -9,7 +9,6 @@ router.param('id', async (id, ctx, next) => {
 });
 
 router.get('albums.new', '/new', async (ctx) => {
- 
   const artistList = await ctx.orm.artist.findAll()
 
   await ctx.render('albums/new', {
