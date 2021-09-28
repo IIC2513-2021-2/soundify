@@ -21,9 +21,10 @@ router.get('albums_for_artists.new', '/new', getArtist, async (ctx) => {
 
 router.post('albums_for_artists.create', '/', getArtist, async (ctx) => {
   const {artist} = ctx.state;
-  const album = ctx.orm.album.build(ctx.request.body);
-  album.artistId = artist.id;
-  await album.save({ fields: ['name','artistId', 'publishedAt', 'cover'] });
+  //const album = ctx.orm.album.build(ctx.request.body);
+  //album.artistId = artist.id;
+  //await album.save({ fields: ['name','artistId', 'publishedAt', 'cover'] });
+  await artist.createAlbum(ctx.request.body);
   ctx.redirect(ctx.router.url('artists.show', {id: artist.id}));
 });
 
