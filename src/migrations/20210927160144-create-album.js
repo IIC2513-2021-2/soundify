@@ -7,7 +7,7 @@ module.exports = {
       type: Sequelize.INTEGER,
     },
 
-    id_artist: {
+    artistId: {
       type: Sequelize.INTEGER,
     },
     name: {
