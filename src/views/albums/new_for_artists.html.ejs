@@ -1,18 +1,5 @@
-<a href="<%= albumPath %>">Back</a>
 <h2>New album</h2>
 <form action="<%= submitAlbumPath %>" method="POST">
-
-  <div>
-    <label for="artistId">Artist</label>
-    <select name="artistId" id="artistId">
-      <% artistList.forEach((artist) => { %>
-        <option value="<%= artist.id %>">
-          <%= artist.name %>
-        </option>
-      <% }) %>
-    </select>
-  </div>
-
   <div>
     <label for="name">Name</label>
     <input type="text" name="name" id="name" />
