@@ -14,7 +14,7 @@ module.exports = {
       type: Sequelize.STRING,
     },
     publishedAt: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.DATEONLY,
     },
     cover: {
       type: Sequelize.STRING,
