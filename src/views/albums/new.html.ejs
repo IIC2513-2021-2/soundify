@@ -5,11 +5,11 @@
   <div>
     <label for="artistId">Artist</label>
     <select name="artistId" id="artistId">
-        <% artistList.forEach((artist) => { %>
-            <option value="<%= artist.id %>">
-                <%= artist.name %>
-            </option>
-        <% }) %>
+      <% artistList.forEach((artist) => { %>
+        <option value="<%= artist.id %>">
+          <%= artist.name %>
+        </option>
+      <% }) %>
     </select>
   </div>
 
