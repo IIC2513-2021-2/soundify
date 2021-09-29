@@ -19,10 +19,11 @@
           <td><%= artist.genres %></td>
           <td><%= artist.formedAt %></td>
           <td><%= artist.members %></td>
-          <% if (artist.albums[0] != undefined) { %>
-          <td><%= artist.albums[0].name %></td>
+          <% if (artist.albums.length) { %>
+            <td><%= artist.albums[0].name%></td>
           <% } else { %>
-          <td> None <% } %> </td>
+            <td> No albums </td>
+          <% } %>
           <td><a href="<%= artistPath(artist.id) %>">View more</a></td>
         </tr>
       <% }) %>
