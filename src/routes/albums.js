@@ -35,8 +35,10 @@ router.get('albums.list', '/', async (ctx) => {
 
 router.get('albums.show', '/:id', async (ctx) => {
   const { album } = ctx.state;
+  const artist = await album.getArtist(); // lazy loading example
   await ctx.render('albums/show', {
     album,
+    artist,
     albumsPath: ctx.router.url('albums.list'),
   });
 });
