@@ -1,0 +1,12 @@
+<h1>About Soundify</h1>
+<p>This application is built in the context of IIC2513 course at Pontificia Universidad Católica de Chile</p>
+<h3>Contributors</h3>
+<ul>
+  <% contributors.forEach((contributor) => { %>
+    <li class="<%= contributor.name.includes('Retamal') ? 'highlight' : '' %>">
+      <a href="https://github.com/<%= contributor.username %>" target="_blank">
+        <%= contributor.name %>
+      </a>
+    </li>
+  <% }) %>
+</ul>
