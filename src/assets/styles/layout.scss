@@ -1,4 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 html, body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: $main-color;
+  background-color: $background-color;
+}
+
+html, body, ul {
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $soundify-blue;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+main {
+  padding-top: 20px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid #777;
+
+  a {
+    color: $main-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .container {
+    display: flex;
+  }
+
+  .logo {
+    text-transform: lowercase;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+
+    a:hover {
+      color: $soundify-light-gray;
+    }
+  }
+
+  nav {
+    flex: 1;
+
+    ul {
+      display: flex;
+      list-style-type: none;
+
+      li {
+        a {
+          display: inline-block;
+          padding: 20px;
+
+          &:hover {
+            background-color: $soundify-light-gray;
+            color: white;
+          }
+        }
+      }
+    }
+  }
 }
