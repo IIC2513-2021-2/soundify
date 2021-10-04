@@ -17,6 +17,21 @@
         <li>
           <a href="<%= paths.about %>">About</a>
         </li>
+        <% if (locals.currentUser) { %>
+          <li>
+            <a href="<%= paths.profilePath %>">My Profile</a>
+          </li>
+          <li>
+            <form action="<%= paths.destroySession %>" method="post">
+              <input type="hidden" name="_method" value="delete" />
+              <input type="submit" value="Log Out" />
+            </form>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="<%= paths.newSession %>">Log In</a>
+          </li>
+        <% } %>
       </ul>
     </nav>
   </div>

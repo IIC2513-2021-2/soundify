@@ -5,8 +5,16 @@ const artists = require('./routes/artists');
 const albums = require('./routes/albums');
 const albumsForArtists = require('./routes/albumsForArtists');
 const users = require('./routes/users');
+const session = require('./routes/session');
 
 const router = new KoaRouter();
+
+router.use(async (ctx, next) => {
+  if (ctx.session.currentUserId) {
+    ctx.state.currentUser = await ctx.orm.user.findByPk(ctx.session.currentUserId);
+  }
+  return next();
+});
 
 router.use(async (ctx, next) => {
   ctx.state.paths = {
@@ -15,6 +23,9 @@ router.use(async (ctx, next) => {
     artists: ctx.router.url('artists.list'),
     albums: ctx.router.url('albums.list'),
     about: ctx.router.url('index.about'),
+    newSession: ctx.router.url('session.new'),
+    destroySession: ctx.router.url('session.destroy'),
+    profilePath: ctx.session.currentUserId && ctx.router.url('users.show', { id: ctx.session.currentUserId }),
   };
 
   await next();
@@ -25,5 +36,6 @@ router.use('/artists', artists.routes());
 router.use('/albums', albums.routes());
 router.use('/artists/:artistId/albums', albumsForArtists.routes());
 router.use('/users', users.routes());
+router.use('/session', session.routes());
 
 module.exports = router;

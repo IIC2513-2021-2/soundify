@@ -5,3 +5,7 @@
     <a href="<%= paths.albums %>">Albums</a>
   </div>
 </section>
+
+<% if (locals.currentUser) { %>
+  <span>Hola <%= currentUser.email %>!</span>
+<% } %>
