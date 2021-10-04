@@ -30,7 +30,5 @@ module.exports = {
     await queryInterface.bulkInsert('artists', artistsArray);
   },
 
-  down: async (queryInterface) => {
-    await queryInterface.bulkDelete('artists', null);
-  }
+  down: (queryInterface) => queryInterface.bulkDelete('artists', null),
 };

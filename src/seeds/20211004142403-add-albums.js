@@ -85,7 +85,5 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface) => {
-    await queryInterface.bulkDelete('albums', null);
-  }
+  down: (queryInterface) => queryInterface.bulkDelete('albums', null),
 };
