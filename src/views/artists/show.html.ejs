@@ -8,9 +8,11 @@
 <% } %>
 <h3>Albums</h3>
 
-
-<% albums.forEach((album) => { %>
+<ul class="albums">
+  <% albums.forEach((album) => { %>
     <li>
-      <td><%= album.name %></td>
+      <h4><%= album.name %></h4>
+      <img src="<%= album.cover %>" alt="<%= album.name %>, album from <%= artist.name %>" />
     </li>
-    <% }) %>
+  <% }) %>
+</ul>
