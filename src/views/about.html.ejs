@@ -4,7 +4,7 @@
 <ul>
   <% contributors.forEach((contributor) => { %>
     <li class="<%= contributor.name.includes('Retamal') ? 'highlight' : '' %>">
-      <a href="https://github.com/<%= contributor.username %>" target="_blank">
+      <a href="https://github.com/<%= contributor.username %>" target="_blank" rel="noopener noreferrer">
         <%= contributor.name %>
       </a>
     </li>

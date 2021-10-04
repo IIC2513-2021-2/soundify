@@ -1,0 +1,33 @@
+<a href="<%= usersPath %>">Back</a>
+<h2>New user</h2>
+<div>
+  <% if (locals.errors) { %>
+    Please fix the following errors:
+    <ul>
+      <% errors.forEach(error => { %>
+        <li><%= error.message %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+
+<form action="<%= submitUserPath %>" method="POST">
+  <div>
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>"/>
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>"/>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>"/>
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" value="<%= user.password %>"/>
+  </div>
+  <input type="submit" value="Add new user" />
+</form>
