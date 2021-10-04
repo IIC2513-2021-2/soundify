@@ -14,20 +14,15 @@ router.post('session.create', '/', async (ctx) => {
   const user = await ctx.orm.user.findOne({ where: { email } });
 
   /* Explain, that usually you encrypt the password,
-  so you check if the input one encripted its equal to the actual one */
+  so you check if the encrypted input is equal to the actual password */
   const authenticated = (user && password === user.password);
-  if (user && authenticated) {
-      ctx.session.currentUserId = user.id;
-      ctx.redirect('/');
-  } else if (!user) {
-    await ctx.render('session/new', {
-      error: 'Email no registrado',
-      email,
-      submitPath: ctx.router.url('session.create'),
-    });
+  if (authenticated) {
+    ctx.session.currentUserId = user.id;
+    ctx.redirect('/');
   } else {
+    const error = user ? 'Wrong password' : 'The email is not registered';
     await ctx.render('session/new', {
-      error: 'Contraseña incorrecta',
+      error,
       email,
       submitPath: ctx.router.url('session.create'),
     });

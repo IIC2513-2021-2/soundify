@@ -14,19 +14,19 @@
 
 <form action="<%= submitUserPath %>" method="POST">
   <div>
-    <label for="name">First Name</label>
+    <label for="firstName">First Name</label>
     <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>"/>
   </div>
   <div>
-    <label for="origin">Last Name</label>
+    <label for="lastName">Last Name</label>
     <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>"/>
   </div>
   <div>
-    <label for="genres">Email</label>
+    <label for="email">Email</label>
     <input type="email" name="email" id="email" value="<%= user.email %>"/>
   </div>
   <div>
-    <label for="formedAt">Password</label>
+    <label for="password">Password</label>
     <input type="password" name="password" id="password" value="<%= user.password %>"/>
   </div>
   <input type="submit" value="Add new user" />

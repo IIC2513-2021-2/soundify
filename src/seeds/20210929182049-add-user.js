@@ -1,7 +1,4 @@
-const models = require('../models');
 const faker = require('faker');
-
-const User = models.user;
 
 let usersArray = [];
 
@@ -15,7 +12,7 @@ usersArray.push({
 });
 
 usersArray = usersArray.concat(
-  [...Array(10)].map((user) => (
+  [...Array(10)].map(() => (
     {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -28,6 +25,6 @@ usersArray = usersArray.concat(
 )
 
 module.exports = {
-  up: async () => User.bulkCreate(usersArray),
+  up: async (queryInterface) => queryInterface.bulkInsert('users', usersArray),
   down: async (queryInterface) => queryInterface.bulkDelete('users', null, {}),
 };

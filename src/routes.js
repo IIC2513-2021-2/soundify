@@ -13,7 +13,7 @@ router.use(async (ctx, next) => {
   if (ctx.session.currentUserId) {
     ctx.state.currentUser = await ctx.orm.user.findByPk(ctx.session.currentUserId);
   }
-  return next();
+  await next();
 });
 
 router.use(async (ctx, next) => {
@@ -25,7 +25,7 @@ router.use(async (ctx, next) => {
     about: ctx.router.url('index.about'),
     newSession: ctx.router.url('session.new'),
     destroySession: ctx.router.url('session.destroy'),
-    profilePath: ctx.session.currentUserId && ctx.router.url('users.show', { id: ctx.session.currentUserId }),
+    profile: ctx.session.currentUserId && ctx.router.url('users.show', { id: ctx.session.currentUserId }),
   };
 
   await next();

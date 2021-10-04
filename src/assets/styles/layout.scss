@@ -67,11 +67,14 @@ header {
     ul {
       display: flex;
       list-style-type: none;
+      align-items: center;
 
       li {
-        a {
+        a, input {
           display: inline-block;
           padding: 20px;
+          border: none;
+          background: none;
 
           &:hover {
             background-color: $soundify-light-gray;
