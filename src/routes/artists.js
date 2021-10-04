@@ -1,4 +1,5 @@
 const KoaRouter = require('koa-router');
+const { checkAuth } = require('../middlewares/auth');
 
 const router = new KoaRouter();
 
@@ -7,6 +8,30 @@ router.param('id', async (id, ctx, next) => {
   if (!ctx.state.artist) return ctx.throw(404);
   return next();
 });
+
+router.get('artists.list', '/', async (ctx) => {
+  // const artists = await ctx.orm.artist.findAll(); \\ CAPSULA QUERIES: EJEMPLO N+1
+  // const albums = await Promise.all(artists.map((artist) => artist.getAlbums())); CAPSULA QUERIES: EJEMPLO N+1
+  const artists = await ctx.orm.artist.findAll({ include: ctx.orm.album }); // eager loading
+  await ctx.render('artists/index', {
+    artists,
+    artistPath: (id) => ctx.router.url('artists.show', { id }),
+    newArtistPath: ctx.router.url('artists.new'),
+  });
+});
+
+router.get('artists.show', '/show/:id', async (ctx) => {
+  const { artist } = ctx.state;
+  const albums = await artist.getAlbums(); // lazy loading
+  await ctx.render('artists/show', {
+    artist,
+    artistsPath: ctx.router.url('artists.list'),
+    albums,
+  });
+});
+
+// Protected routes
+router.use(checkAuth);
 
 router.get('artists.new', '/new', async (ctx) => {
   const artist = ctx.orm.artist.build();
@@ -30,27 +55,6 @@ router.post('artists.create', '/', async (ctx) => {
       artistsPath: ctx.router.url('artists.list'),
     });
   }
-});
-
-router.get('artists.list', '/', async (ctx) => {
-  // const artists = await ctx.orm.artist.findAll(); \\ CAPSULA QUERIES: EJEMPLO N+1
-  // const albums = await Promise.all(artists.map((artist) => artist.getAlbums())); CAPSULA QUERIES: EJEMPLO N+1
-  const artists = await ctx.orm.artist.findAll({ include: ctx.orm.album }); // eager loading
-  await ctx.render('artists/index', {
-    artists,
-    artistPath: (id) => ctx.router.url('artists.show', { id }),
-    newArtistPath: ctx.router.url('artists.new'),
-  });
-});
-
-router.get('artists.show', '/:id', async (ctx) => {
-  const { artist } = ctx.state;
-  const albums = await artist.getAlbums(); // lazy loading
-  await ctx.render('artists/show', {
-    artist,
-    artistsPath: ctx.router.url('artists.list'),
-    albums,
-  });
 });
 
 module.exports = router;

@@ -35,6 +35,10 @@ router.get('index.about', 'about', async (ctx) => {
       name: 'José Antonio Castro',
       username: 'Baelfire18',
     },
+    {
+      name: 'Tomás Soto',
+      username: 'Crespy98',
+    },
   ];
   await ctx.render('about', { contributors });
 });

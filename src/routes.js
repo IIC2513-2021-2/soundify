@@ -9,6 +9,21 @@ const session = require('./routes/session');
 
 const router = new KoaRouter();
 
+router.use(async (ctx, next)=> {
+  try {
+    await next();
+  } catch (err) {
+    switch(err.status) {
+      case 401:
+        ctx.app.emit('error', err, ctx);
+        ctx.redirect(ctx.router.url('session.new'));
+        break;
+      default:
+        throw err;
+    }
+  }
+});
+
 router.use(async (ctx, next) => {
   if (ctx.session.currentUserId) {
     ctx.state.currentUser = await ctx.orm.user.findByPk(ctx.session.currentUserId);
