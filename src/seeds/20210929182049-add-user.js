@@ -1,4 +1,7 @@
 const faker = require('faker');
+const bcrypt = require('bcrypt');
+
+const PASSWORD_SALT_ROUNDS = 10;
 
 module.exports = {
   up: async (queryInterface) => {
@@ -8,7 +11,7 @@ module.exports = {
       firstName: 'Tony',
       lastName: 'Montana',
       email: 'scarface@web.cl',
-      password: '123456',
+      password: bcrypt.hashSync('123456', PASSWORD_SALT_ROUNDS),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -19,7 +22,7 @@ module.exports = {
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
           email: faker.internet.email(),
-          password: faker.internet.password(8),
+          password: bcrypt.hashSync(faker.internet.password(8), PASSWORD_SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date()
         }
