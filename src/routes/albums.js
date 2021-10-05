@@ -3,6 +3,12 @@ const { checkAuth } = require('../middlewares/auth');
 
 const router = new KoaRouter();
 
+router.param('id', async (id, ctx, next) => {
+  ctx.state.album = await ctx.orm.album.findByPk(id);
+  if (!ctx.state.album) return ctx.throw(404);
+  return next();
+});
+
 router.get('albums.new', '/new', checkAuth, async (ctx) => {
   const artistList = await ctx.orm.artist.findAll()
 
