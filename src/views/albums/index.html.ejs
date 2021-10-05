@@ -21,4 +21,6 @@
     </tbody>
   </thead>
 </table>
-<a href="<%= newAlbumPath %>">New album</a>
+<% if (locals.currentUser) { %>
+  <a href="<%= newAlbumPath %>">New album</a>
+<% } %>
