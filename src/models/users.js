@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    async checkPassword(password) {
+    checkPassword(password) {
       return bcrypt.compare(password, this.password);
     }
   }
