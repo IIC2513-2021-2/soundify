@@ -1,4 +1,5 @@
 const KoaRouter = require('koa-router');
+const { checkAuth } = require('../middlewares/auth');
 
 const router = new KoaRouter();
 
@@ -8,7 +9,7 @@ router.param('id', async (id, ctx, next) => {
   return next();
 });
 
-router.get('albums.new', '/new', async (ctx) => {
+router.get('albums.new', '/new', checkAuth, async (ctx) => {
   const artistList = await ctx.orm.artist.findAll()
 
   await ctx.render('albums/new', {
@@ -18,7 +19,7 @@ router.get('albums.new', '/new', async (ctx) => {
   });
 });
 
-router.post('albums.create', '/', async (ctx) => {
+router.post('albums.create', '/', checkAuth, async (ctx) => {
   const album = ctx.orm.album.build(ctx.request.body);
   await album.save({ fields: ['name', 'artistId', 'publishedAt', 'cover'] });
   ctx.redirect(ctx.router.url('artists.show', {id: album.artistId}));

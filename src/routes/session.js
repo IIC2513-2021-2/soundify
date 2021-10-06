@@ -13,9 +13,7 @@ router.post('session.create', '/', async (ctx) => {
   const { email, password } = ctx.request.body;
   const user = await ctx.orm.user.findOne({ where: { email } });
 
-  /* Explain, that usually you encrypt the password,
-  so you check if the encrypted input is equal to the actual password */
-  const authenticated = (user && password === user.password);
+  const authenticated = (user && await user.checkPassword(password));
   if (authenticated) {
     ctx.session.currentUserId = user.id;
     ctx.redirect('/');
