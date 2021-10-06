@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.addColumn('artists', 'members', { type: Sequelize.STRING });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.removeColumn('artists', 'members');
   },
 };

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const config = require('../config/database.js')[process.env.NODE_ENV || 'development'];
+const config = require('../config/database.jsx')[process.env.NODE_ENV || 'development'];
 
 const basename = path.basename(module.filename);
 
