@@ -14,7 +14,7 @@
           <td><%= album.name %></td>
           <td><%= album.artistId %></td>
           <td><%= album.publishedAt %></td>
-          <td><%= album.cover %></td>
+          <td><img src="<%= album.cover %>" alt="<%= album.name %>" class="album-cover"/></td>
           <td><a href="<%= albumPath(album.id) %>">View more</a></td>
         </tr>
       <% }) %>
