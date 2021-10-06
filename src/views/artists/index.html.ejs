@@ -29,4 +29,6 @@
     </tbody>
   </thead>
 </table>
-<a href="<%= newArtistPath %>">New artist</a>
+<% if (locals.currentUser) { %>
+  <a href="<%= newArtistPath %>">New artist</a>
+  <% } %>
