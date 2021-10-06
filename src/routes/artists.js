@@ -35,7 +35,8 @@ router.post('artists.create', '/', checkAuth, async (ctx) => {
 
 router.get('artists.list', '/', async (ctx) => {
   // const artists = await ctx.orm.artist.findAll(); \\ CAPSULA QUERIES: EJEMPLO N+1
-  // const albums = await Promise.all(artists.map((artist) => artist.getAlbums())); CAPSULA QUERIES: EJEMPLO N+1
+  // const albums = await Promise.all(
+  //  artists.map((artist) => artist.getAlbums())); CAPSULA QUERIES: EJEMPLO N+1
   const artists = await ctx.orm.artist.findAll({ include: ctx.orm.album }); // eager loading
   await ctx.render('artists/index', {
     artists,

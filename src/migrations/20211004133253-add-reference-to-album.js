@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.addConstraint('albums', {
@@ -16,5 +14,5 @@ module.exports = {
 
   down: async (queryInterface) => {
     await queryInterface.removeConstraint('albums', 'albums_artistId_fkey');
-  }
+  },
 };

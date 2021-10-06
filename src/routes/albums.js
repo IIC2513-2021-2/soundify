@@ -10,7 +10,7 @@ router.param('id', async (id, ctx, next) => {
 });
 
 router.get('albums.new', '/new', checkAuth, async (ctx) => {
-  const artistList = await ctx.orm.artist.findAll()
+  const artistList = await ctx.orm.artist.findAll();
 
   await ctx.render('albums/new', {
     submitAlbumPath: ctx.router.url('albums.create'),
@@ -22,7 +22,7 @@ router.get('albums.new', '/new', checkAuth, async (ctx) => {
 router.post('albums.create', '/', checkAuth, async (ctx) => {
   const album = ctx.orm.album.build(ctx.request.body);
   await album.save({ fields: ['name', 'artistId', 'publishedAt', 'cover'] });
-  ctx.redirect(ctx.router.url('artists.show', {id: album.artistId}));
+  ctx.redirect(ctx.router.url('artists.show', { id: album.artistId }));
 });
 
 router.get('albums.list', '/', async (ctx) => {

@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface) => {
     const artistsArray = [];
@@ -8,7 +6,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    
+
     artistsArray.push({
       name: 'Tame Impala',
       origin: 'Perth, Australia',
@@ -17,7 +15,7 @@ module.exports = {
       members: 'Kevin Parker',
       ...commonData,
     });
-    
+
     artistsArray.push({
       name: 'Khruangbin',
       origin: 'Houston, Texas, United States',
