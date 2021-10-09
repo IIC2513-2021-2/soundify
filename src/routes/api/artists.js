@@ -18,4 +18,15 @@ router.get('/:id', async (ctx) => {
   ctx.body = artist;
 });
 
+router.post('/', async (ctx) => {
+  try {
+    const artist = await ctx.orm.artist.build(ctx.request.body);
+    await artist.save();
+    ctx.body = artist;
+    ctx.status = 201;
+  } catch (ValidationError) {
+    ctx.throw(400);
+  }
+});
+
 module.exports = router;
