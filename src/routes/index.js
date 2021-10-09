@@ -5,7 +5,7 @@ const router = new KoaRouter();
 router.get('index', '/', async (ctx) => {
   await ctx.render('index', {
     artistsPath: ctx.router.url('artists.list'),
-    albumsPath: ctx.router.url("albums.list")
+    albumsPath: ctx.router.url('albums.list'),
   });
 });
 

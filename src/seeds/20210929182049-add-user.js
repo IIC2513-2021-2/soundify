@@ -24,9 +24,9 @@ module.exports = {
           email: faker.internet.email(),
           password: bcrypt.hashSync(faker.internet.password(8), PASSWORD_SALT_ROUNDS),
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         }
-      ))
+      )),
     );
 
     await queryInterface.bulkInsert('users', usersArray);

@@ -5,9 +5,8 @@ const router = new KoaRouter();
 router.get('session.new', '/new', async (ctx) => {
   await ctx.render('session/new', {
     submitPath: ctx.router.url('session.create'),
-    });
-  }
-);
+  });
+});
 
 router.post('session.create', '/', async (ctx) => {
   const { email, password } = ctx.request.body;
