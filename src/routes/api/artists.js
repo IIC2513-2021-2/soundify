@@ -10,7 +10,9 @@ const router = new KoaRouter();
 
 router.param('id', async (id, ctx, next) => {
   ctx.state.artist = await ctx.orm.artist.findByPk(id);
-  if (!ctx.state.artist) return ctx.throw(404);
+  if (!ctx.state.artist) {
+    return ctx.throw(404, "The artist you are looking for doesn't exists");
+  }
   return next();
 });
 
