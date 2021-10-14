@@ -16,17 +16,17 @@ router.param('id', async (id, ctx, next) => {
   return next();
 });
 
-router.get('/', async (ctx) => {
+router.get('api.artists.list', '/', async (ctx) => {
   const artists = await ctx.orm.artist.findAll();
   ctx.body = ArtistSerializer.serialize(artists);
 });
 
-router.get('/:id', async (ctx) => {
+router.get('api.artists.show', '/:id', async (ctx) => {
   const { artist } = ctx.state;
   ctx.body = ArtistSerializer.serialize(artist);
 });
 
-router.post('/', async (ctx) => {
+router.post('api.artists.create', '/', async (ctx) => {
   try {
     const artist = await ctx.orm.artist.build(ctx.request.body);
     await artist.save();
