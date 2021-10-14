@@ -29,7 +29,7 @@ router.get('api.artists.show', '/:id', async (ctx) => {
 router.post('api.artists.create', '/', async (ctx) => {
   try {
     const artist = await ctx.orm.artist.build(ctx.request.body);
-    await artist.save();
+    await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
     ctx.body = ArtistSerializer.serialize(artist);
     ctx.status = 201;
   } catch (ValidationError) {
