@@ -11,7 +11,7 @@ const router = new KoaRouter({ prefix: '/api' });
 router.use('/auth', auth.routes());
 
 /* Protected routes */
-router.use(jwt({ secret: process.env.JWT_SECRET, key: 'authData' }));
+router.use(jwt({ secret: process.env.JWT_SECRET, key: 'authData' }).unless({ method: 'GET' }));
 router.use(apiSetCurrentUser);
 router.use('/artists', artists.routes());
 
