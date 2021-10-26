@@ -1,8 +1,7 @@
 const KoaRouter = require('koa-router');
+const jwtgenerator = require('jsonwebtoken');
 
 const router = new KoaRouter();
-
-const jwtgenerator = require('jsonwebtoken');
 
 function generateToken(user) {
   return new Promise((resolve, reject) => {
