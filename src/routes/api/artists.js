@@ -2,7 +2,10 @@ const KoaRouter = require('koa-router');
 const JSONAPISerializer = require('jsonapi-serializer').Serializer;
 
 const ArtistSerializer = new JSONAPISerializer('artists', {
-  attributes: ['name', 'origin', 'genres', 'formedAt', 'members'],
+  // Aquí se supone que durante la ayudantía se cambiará el nombre del atributo formedAt a foundedIn
+  // para así poder ejemplificar el caso de la importancia del test de snapshot,
+  // donde una funcionalidad en frontend se rompería
+  attributes: ['name', 'origin', 'genres', 'foundedIn', 'members'],
   keyForAttribute: 'camelCase',
 });
 
@@ -29,7 +32,7 @@ router.get('api.artists.show', '/:id', async (ctx) => {
 router.post('api.artists.create', '/', async (ctx) => {
   try {
     const artist = await ctx.orm.artist.build(ctx.request.body);
-    await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
+    await artist.save({ fields: ['name', 'origin', 'genres', 'foundedIn', 'members'] });
     ctx.body = ArtistSerializer.serialize(artist);
     ctx.status = 201;
   } catch (ValidationError) {

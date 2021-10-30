@@ -21,7 +21,7 @@ router.get('artists.new', '/new', checkAuth, async (ctx) => {
 router.post('artists.create', '/', checkAuth, async (ctx) => {
   const artist = ctx.orm.artist.build(ctx.request.body);
   try {
-    await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
+    await artist.save({ fields: ['name', 'origin', 'genres', 'foundedIn', 'members'] });
     ctx.redirect(ctx.router.url('artists.list'));
   } catch (ValidationError) {
     await ctx.render('artists/new', {

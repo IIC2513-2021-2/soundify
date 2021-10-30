@@ -11,7 +11,7 @@ module.exports = {
       name: 'Tame Impala',
       origin: 'Perth, Australia',
       genres: 'Psychedelic pop, psychedelic rock, disco, synth-pop, neo-psychedelia',
-      formedAt: 2007,
+      foundedIn: 2007,
       members: 'Kevin Parker',
       ...commonData,
     });
@@ -20,7 +20,7 @@ module.exports = {
       name: 'Khruangbin',
       origin: 'Houston, Texas, United States',
       genres: 'Psychedelic rock, surf rock, funk, instrumental rock, dub, rock',
-      formedAt: 2009,
+      foundedIn: 2009,
       members: 'Laura Lee, Mark Speer, Donald "DJ" Johnson',
       ...commonData,
     });

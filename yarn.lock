@@ -5894,11 +5894,6 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-jwtoken@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/jwtoken/-/jwtoken-0.0.0.tgz#dd070385e0b4dfde4f95e0243e633250615116a4"
-  integrity sha512-ksJY5AC2eo7FJ6HSpB6dacZI38njm46m0W13hzt1EojRtL5eXwdf/e8NHP81brPkczspmMCucpRjzBjN/J9DXw==
-
 keygrip@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.1.0.tgz#871b1681d5e159c62a445b0c74b615e0917e7226"
