@@ -25,11 +25,13 @@ router.post('api.auth.login', '/', async (ctx) => {
 
   const token = await generateToken(user);
 
-  const userData = { ...user.dataValues };
-  delete userData.password;
+  const { id, firstName, lastName } = user.dataValues;
 
   ctx.body = {
-    ...userData,
+    id,
+    firstName,
+    lastName,
+    email,
     access_token: token,
     token_type: 'Bearer',
   };

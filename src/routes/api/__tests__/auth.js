@@ -21,10 +21,12 @@ describe('Auth API routes', () => {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'janedoe@gmail.com',
-      password: 'asdf1234',
+      password: 'web1234',
     };
+    const { email, password } = userData;
 
     beforeAll(async () => {
+      // Creamos un usuario para poder iniciar sesion
       createdUser = await app.context.orm.user.create(userData);
     });
 
@@ -33,12 +35,12 @@ describe('Auth API routes', () => {
       .set('Content-type', 'application/json')
       .send(body);
 
-    describe('When user data is valid', () => {
+    describe('When user credentials are valid', () => {
       beforeAll(async () => {
-        response = await postAuth({ email: userData.email, password: userData.password });
+        response = await postAuth({ email, password });
       });
 
-      test('when email is registered and password is correct, responds with 200 status code', () => {
+      test('responds with 200 status code', () => {
         expect(response.status).toBe(200);
       });
 
@@ -47,14 +49,14 @@ describe('Auth API routes', () => {
       });
     });
 
-    describe('When user data is invalid', () => {
-      test('when email exists and password is incorrect, responds with 401 status code', async () => {
-        response = await postAuth({ email: userData.email, password: 'otherpassword' });
+    describe('When user credentials are invalid', () => {
+      test('when password is incorrect, responds with 401 status code', async () => {
+        response = await postAuth({ email, password: 'otherpassword' });
         expect(response.status).toBe(401);
       });
 
-      test('when email is not registered in the database, responds with 404 status code', async () => {
-        response = await postAuth({ email: 'unregistered@gmail.com', password: 'asdf1234' });
+      test('when email is not registered, responds with 404 status code', async () => {
+        response = await postAuth({ email: 'unregistered@gmail.com', password });
         expect(response.status).toBe(404);
       });
     });
