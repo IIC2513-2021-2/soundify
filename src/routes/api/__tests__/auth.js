@@ -53,7 +53,7 @@ describe('Auth API routes', () => {
         expect(response.status).toBe(401);
       });
 
-      test('when email is not registered in the data base, responds with 404 status code', async () => {
+      test('when email is not registered in the database, responds with 404 status code', async () => {
         response = await postAuth({ email: 'unregistered@gmail.com', password: 'asdf1234' });
         expect(response.status).toBe(404);
       });
