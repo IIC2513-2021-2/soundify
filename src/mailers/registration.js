@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const sendgridMail = require('./sendgrid');
 
 module.exports = function sendRegistrationEmail(user) {
