@@ -1,7 +1,6 @@
 const KoaRouter = require('koa-router');
 const JSONAPISerializer = require('jsonapi-serializer').Serializer;
-const registrationEmail = require('../../mailers/registration');
-const sendgridMail = require('../../mailers/sendgrid');
+const sendRegistrationEmail = require('../../mailers/registration');
 
 const UserSerializer = new JSONAPISerializer('users', {
   attributes: ['firstName', 'lastName', 'email'],
@@ -11,11 +10,10 @@ const UserSerializer = new JSONAPISerializer('users', {
 const router = new KoaRouter();
 
 router.post('users.api.create', '/', async (ctx) => {
-  const { firstName, lastName, email } = ctx.request.body;
   const user = ctx.orm.user.build(ctx.request.body);
   try {
     await user.save({ fields: ['firstName', 'lastName', 'email', 'password'] });
-    await sendgridMail.send(registrationEmail(firstName, lastName, email));
+    await sendRegistrationEmail(user);
     ctx.body = UserSerializer.serialize(user);
     ctx.status = 201;
   } catch (ValidationError) {

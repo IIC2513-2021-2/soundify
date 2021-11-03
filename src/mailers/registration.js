@@ -1,7 +1,8 @@
-require('dotenv').config();
+const sendgridMail = require('./sendgrid');
 
-module.exports = function registrationEmail(firstName, lastName, email) {
-  return {
+module.exports = function sendRegistrationEmail(user) {
+  const { firstName, lastName, email } = user;
+  const emailData = {
     from: process.env.SENDGRID_EMAIL,
     personalizations: [{
       to: {
@@ -15,4 +16,6 @@ module.exports = function registrationEmail(firstName, lastName, email) {
     }],
     template_id: process.env.SENDGRID_NEW_USER,
   };
+
+  return sendgridMail.send(emailData);
 };
