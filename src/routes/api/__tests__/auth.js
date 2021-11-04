@@ -5,12 +5,10 @@ const request = supertest(app.callback());
 
 describe('Auth API routes', () => {
   beforeAll(async () => {
-    // Esto bota todas las tablas de la bbdd y sincroniza los modelos
     await app.context.orm.sequelize.sync({ force: true });
   });
 
   afterAll(async () => {
-    // Esto cierra la conexión con sequelize
     await app.context.orm.sequelize.close();
   });
 
@@ -26,7 +24,6 @@ describe('Auth API routes', () => {
     const { email, password } = userData;
 
     beforeAll(async () => {
-      // Creamos un usuario para poder iniciar sesion
       createdUser = await app.context.orm.user.create(userData);
     });
 

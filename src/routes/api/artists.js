@@ -2,9 +2,6 @@ const KoaRouter = require('koa-router');
 const JSONAPISerializer = require('jsonapi-serializer').Serializer;
 
 const ArtistSerializer = new JSONAPISerializer('artists', {
-  // Aquí se supone que durante la ayudantía se cambiará el nombre del atributo formedAt a foundedIn
-  // para así poder ejemplificar el caso de la importancia del test de snapshot,
-  // donde una funcionalidad en frontend se rompería
   attributes: ['name', 'origin', 'genres', 'foundedIn', 'members'],
   keyForAttribute: 'camelCase',
 });

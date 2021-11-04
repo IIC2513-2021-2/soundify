@@ -4,7 +4,7 @@ exports[`Artist API routes GET /api/artists/:id When passed id corresponds to an
 Object {
   "data": Object {
     "attributes": Object {
-      "formedAt": 2009,
+      "foundedIn": 2009,
       "genres": "Rock, Reggae, Alternative/Indie",
       "members": "Dan Reynolds, Ben McKee, Daniel Wayne Sermon, Daniel Platzman",
       "name": "Imagine Dragons",
