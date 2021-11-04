@@ -5,6 +5,7 @@ const artists = require('./routes/artists');
 const albums = require('./routes/albums');
 const albumsForArtists = require('./routes/albumsForArtists');
 const users = require('./routes/users');
+const usersApi = require('./routes/api/users');
 const session = require('./routes/session');
 
 const router = new KoaRouter();
@@ -52,5 +53,6 @@ router.use('/albums', albums.routes());
 router.use('/artists/:artistId/albums', albumsForArtists.routes());
 router.use('/users', users.routes());
 router.use('/session', session.routes());
+router.use('/api/users', usersApi.routes());
 
 module.exports = router;
