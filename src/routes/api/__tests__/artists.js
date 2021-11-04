@@ -39,7 +39,7 @@ describe('Artist API routes', () => {
       });
 
       test('response attributes match saved artist', () => {
-        expect(response.body.data.attributes).toMatchObject(artistData);
+        expect(response.body.data.attributes).toEqual(artistData);
       });
 
       test('body matches snapshot', () => {
