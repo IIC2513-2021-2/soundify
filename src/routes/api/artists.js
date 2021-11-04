@@ -37,4 +37,11 @@ router.post('api.artists.create', '/', async (ctx) => {
   }
 });
 
+router.del('api.artists.delete', '/:id', async (ctx) => {
+  const { artist } = ctx.state;
+  artist.destroy();
+  ctx.body = {};
+  ctx.status = 204;
+});
+
 module.exports = router;
