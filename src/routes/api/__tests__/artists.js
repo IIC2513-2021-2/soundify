@@ -1,5 +1,5 @@
 const supertest = require('supertest');
-const { format } = require('date-fns'); // Mencionar esta librería
+const { format } = require('date-fns');
 const app = require('../../../app');
 
 const request = supertest(app.callback());
@@ -56,14 +56,6 @@ describe('Artist API routes', () => {
     });
   });
 
-  const artistData = {
-    name: 'Unknown Mortal Orchestra',
-    origin: 'Auckland, New Zealand',
-    genres: 'Lofi, Psychedelic Rock, Alternative/Indie',
-    foundedIn: 2009,
-    members: 'Ruban Nielson, Jake Portrait, Kody Nielson',
-  };
-
   const userData = {
     firstName: 'Jane',
     lastName: 'Doe',
@@ -72,6 +64,8 @@ describe('Artist API routes', () => {
   };
   const { email, password } = userData;
 
+  let artistId;
+
   const postAuth = (body) => request
     .post('/api/auth')
     .set('Content-type', 'application/json')
@@ -79,17 +73,29 @@ describe('Artist API routes', () => {
 
   describe('POST /api/artists', () => {
     let response;
+    let token;
+
+    const unauthCreateArtist = () => request.post('/api/artists');
+
+    const authCreateArtist = (body, accessToken) => request
+      .post('/api/artists')
+      .send(body)
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    const artistData = {
+      name: 'Unknown Mortal Orchestra',
+      origin: 'Auckland, New Zealand',
+      genres: 'Lofi, Psychedelic Rock, Alternative/Indie',
+      foundedIn: 2009,
+      members: 'Ruban Nielson, Jake Portrait, Kody Nielson',
+    };
 
     beforeAll(async () => {
       await app.context.orm.user.create(userData);
     });
-
-    let token;
-
-    let createArtist = () => request.post('/api/artists');
     describe('When user is not authorized ❌', () => {
       beforeAll(async () => {
-        response = await createArtist(artistData);
+        response = await unauthCreateArtist(artistData);
       });
       it('should return a 401 status code', () => {
         expect(response.status).toBe(401);
@@ -100,11 +106,6 @@ describe('Artist API routes', () => {
       });
     });
 
-    createArtist = (body, accessToken) => request
-      .post('/api/artists')
-      .send(body)
-      .set('Authorization', `Bearer ${accessToken}`);
-
     describe('When user is authorized', () => {
       let invalidArtist = { ...artistData };
       describe('When foundedIn is a string instead of an integer ❌', () => {
@@ -112,7 +113,7 @@ describe('Artist API routes', () => {
         beforeAll(async () => {
           const authResponse = await postAuth({ email, password });
           token = authResponse.body.access_token;
-          response = await createArtist(invalidArtist, token);
+          response = await authCreateArtist(invalidArtist, token);
         });
         it('should return a 400 status code', () => {
           expect(response.status).toBe(400);
@@ -124,7 +125,7 @@ describe('Artist API routes', () => {
         beforeAll(async () => {
           const authResponse = await postAuth({ email, password });
           token = authResponse.body.access_token;
-          response = await createArtist(invalidArtist, token);
+          response = await authCreateArtist(invalidArtist, token);
         });
         it('should return a 400 status code', () => {
           expect(response.status).toBe(400);
@@ -134,7 +135,8 @@ describe('Artist API routes', () => {
         beforeAll(async () => {
           const authResponse = await postAuth({ email, password });
           token = authResponse.body.access_token;
-          response = await createArtist(artistData, token);
+          response = await authCreateArtist(artistData, token);
+          artistId = response.body.data.id;
         });
         it('should return a 201 status code', () => {
           expect(response.status).toBe(201);
@@ -152,24 +154,24 @@ describe('Artist API routes', () => {
 
   describe('DELETE /api/artists/:id', () => {
     let response;
+    let token;
     const deleteArtist = (id, accessToken) => request
       .del(`/api/artists/${id}`)
       .set('Authorization', `Bearer ${accessToken}`);
-    const albumData = {
+    const albumData = (postArtistId) => ({
       name: 'Multi-love',
-      artistId: 1,
+      artistId: postArtistId,
       publishedAt: format(new Date('2015, 01, 30'), 'yyyy-MM-dd'),
       cover: 'https://m.media-amazon.com/images/I/81Dakro4ZwL._SL1400_.jpg)',
-    };
-    let token;
+    });
     beforeAll(async () => {
-      await app.context.orm.album.create(albumData);
+      await app.context.orm.album.create(albumData(artistId));
       const authResponse = await postAuth({ email, password });
       token = authResponse.body.access_token;
     });
     describe("When artist's id is valid, artist has one album, and user is authenticated ✔️", () => {
       beforeAll(async () => {
-        response = await deleteArtist(1, token);
+        response = await deleteArtist(artistId, token);
       });
       it('should shorten the artists list', async () => {
         const artistCount = await app.context.orm.artist.count();
