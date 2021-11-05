@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Artist API routes GET /api/artists/:id When passed id corresponds to an existing artist body matches snapshot 1`] = `
+exports[`Artist API routes Unprotected artists routes GET /api/artists/:id When passed id corresponds to an existing artist body matches snapshot 1`] = `
 Object {
   "data": Object {
     "attributes": Object {
