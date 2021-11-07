@@ -39,6 +39,34 @@ router.get('index.about', 'about', async (ctx) => {
       name: 'Tomás Soto',
       username: 'Crespy98',
     },
+    {
+      name: 'Kelsey Franken',
+      username: 'kelseyfranken',
+    },
+    {
+      name: 'Gonzalo Concha',
+      username: 'gonzaloconcha',
+    },
+    {
+      name: 'José Manuel Madriza',
+      username: 'LeoMo-27',
+    },
+    {
+      name: 'Pedro Herrera',
+      username: 'pedroherreraj',
+    },
+    {
+      name: 'Valeria Riquelme',
+      username: 'valeeeriquelme',
+    },
+    {
+      name: 'Fernando Arriagada',
+      username: 'Fenho',
+    },
+    {
+      name: 'Diego Solari',
+      username: 'dasolari',
+    },
   ];
   await ctx.render('about', { contributors });
 });
