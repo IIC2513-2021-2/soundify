@@ -83,7 +83,10 @@ describe('Artist API routes', () => {
         members: 'Ruban Nielson, Jake Portrait, Kody Nielson',
       };
 
-      const unauthCreateArtist = () => request.post('/api/artists');
+      const unauthCreateArtist = (body) => request
+        .post('/api/artists')
+        .set('Content-type', 'application/json')
+        .send(body);
 
       const authCreateArtist = (body, accessToken) => request
         .post('/api/artists')
