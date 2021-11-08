@@ -48,12 +48,8 @@ router.get('index.about', 'about', async (ctx) => {
       username: 'gonzaloconcha',
     },
     {
-      name: 'José Manuel Madriza',
+      name: 'José Manuel Madriaza',
       username: 'LeoMo-27',
-    },
-    {
-      name: 'Pedro Herrera',
-      username: 'pedroherreraj',
     },
     {
       name: 'Valeria Riquelme',
