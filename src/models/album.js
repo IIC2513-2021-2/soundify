@@ -11,13 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.artist);
+      this.belongsTo(models.artist, { onDelete: 'CASCADE' });
     }
   }
   album.init({
     artistId: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    publishedAt: DataTypes.DATEONLY,
+    publishedAt: {
+      type: DataTypes.DATEONLY,
+    },
     cover: DataTypes.STRING,
   }, {
     sequelize,

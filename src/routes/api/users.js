@@ -10,8 +10,8 @@ const UserSerializer = new JSONAPISerializer('users', {
 const router = new KoaRouter();
 
 router.post('users.api.create', '/', async (ctx) => {
-  const user = ctx.orm.user.build(ctx.request.body);
   try {
+    const user = ctx.orm.user.build(ctx.request.body);
     await user.save({ fields: ['firstName', 'lastName', 'email', 'password'] });
     await sendRegistrationEmail(user);
     ctx.body = UserSerializer.serialize(user);
