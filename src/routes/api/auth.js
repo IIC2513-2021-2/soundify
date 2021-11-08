@@ -24,7 +24,14 @@ router.post('api.auth.login', '/', async (ctx) => {
   if (!authenticated) ctx.throw(401, 'Invalid password');
 
   const token = await generateToken(user);
+
+  const { id, firstName, lastName } = user.dataValues;
+
   ctx.body = {
+    id,
+    firstName,
+    lastName,
+    email,
     access_token: token,
     token_type: 'Bearer',
   };

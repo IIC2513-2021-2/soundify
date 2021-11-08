@@ -2,7 +2,7 @@ const KoaRouter = require('koa-router');
 const JSONAPISerializer = require('jsonapi-serializer').Serializer;
 
 const ArtistSerializer = new JSONAPISerializer('artists', {
-  attributes: ['name', 'origin', 'genres', 'formedAt', 'members'],
+  attributes: ['name', 'origin', 'genres', 'foundedIn', 'members'],
   keyForAttribute: 'camelCase',
 });
 
@@ -29,12 +29,19 @@ router.get('api.artists.show', '/:id', async (ctx) => {
 router.post('api.artists.create', '/', async (ctx) => {
   try {
     const artist = await ctx.orm.artist.build(ctx.request.body);
-    await artist.save({ fields: ['name', 'origin', 'genres', 'formedAt', 'members'] });
+    await artist.save({ fields: ['name', 'origin', 'genres', 'foundedIn', 'members'] });
     ctx.body = ArtistSerializer.serialize(artist);
     ctx.status = 201;
   } catch (ValidationError) {
     ctx.throw(400);
   }
+});
+
+router.del('api.artists.delete', '/:id', async (ctx) => {
+  const { artist } = ctx.state;
+  await artist.destroy();
+  ctx.body = {};
+  ctx.status = 204;
 });
 
 module.exports = router;

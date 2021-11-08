@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-    formedAt: {
+    foundedIn: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {

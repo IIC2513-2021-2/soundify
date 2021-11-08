@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Artist API routes Unprotected artists routes GET /api/artists/:id When passed id corresponds to an existing artist body matches snapshot 1`] = `
+Object {
+  "data": Object {
+    "attributes": Object {
+      "foundedIn": 2009,
+      "genres": "Rock, Reggae, Alternative/Indie",
+      "members": "Dan Reynolds, Ben McKee, Daniel Wayne Sermon, Daniel Platzman",
+      "name": "Imagine Dragons",
+      "origin": "Las Vegas, Nevada, United States",
+    },
+    "id": "1",
+    "type": "artists",
+  },
+}
+`;

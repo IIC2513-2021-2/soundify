@@ -3,22 +3,54 @@ name: IIC2513 Node CI
 on: pull_request
 
 jobs:
-  lint:
+  test-and-lint:
+    name: Tests and linter
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-
-    timeout-minutes: 12
-
+    env:
+      DATABASE_URL: postgresql://localhost/postgres
+      DB_DIALECT: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      JWT_SECRET: some-secret
+      NODE_ENV: test
+    services:
+      db:
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        image: postgres:12.4
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       matrix:
         node-version: [12.x]
-
     steps:
       - uses: actions/checkout@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --prefer-offline
+      - name: Setup Database
+        run: |
+          yarn sequelize db:create
+          yarn sequelize db:migrate
       - name: Run ESLint
         run: yarn lint
+      - name: Run jest tests
+        run: yarn test --silent
