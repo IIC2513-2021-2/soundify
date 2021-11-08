@@ -15,16 +15,19 @@ describe('User API routes', () => {
     const createUser = (body) => request
       .post('/api/users')
       .send(body);
-    describe('When user email is invalid ❌', () => {
+
+    describe('When user email is invalid', () => {
       const userData = {
         firstName: 'Jane',
         lastName: 'Doe',
         email: 'janedoegmail.com',
         password: 'web1234',
       };
+
       beforeAll(async () => {
         await createUser(userData);
       });
+
       it('should not have created a user', async () => {
         const countUser = await app.context.orm.user.count();
         expect(countUser).toBe(0);
@@ -37,9 +40,11 @@ describe('User API routes', () => {
         email: 'janedoe@gmail.com',
         password: 'web1234',
       };
+
       beforeAll(async () => {
         await createUser(userData);
       });
+
       it('should have created a user', async () => {
         const countUser = await app.context.orm.user.count();
         expect(countUser).toBe(1);
