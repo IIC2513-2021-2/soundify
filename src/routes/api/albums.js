@@ -22,15 +22,16 @@ router.post('api.albums.create', '/', async (ctx) => {
 router.patch('api.albums.update', '/:id', async (ctx) => {
   const { cloudinary } = ctx.state;
   try {
-    const album = await ctx.orm.album.findById(ctx.params.id);
-    const { image } = ctx.request.files;
-    if (image.size > 0) {
-      const { imageUrl } = await cloudinary.uploader.upload(image.path);
+    const album = await ctx.orm.album.findByPk(ctx.params.id);
+    const { cover } = ctx.request.files;
+    if (cover.size > 0) {
+      const imageUrl = await cloudinary.uploader.upload(cover.path);
       ctx.request.body.cover = imageUrl.url;
     }
     await album.update(ctx.request.body, { fields: ['name', 'artistId', 'publishedAt', 'cover'] });
     ctx.body = AlbumSerializer.serialize(album);
   } catch (ValidationError) {
+    console.log(ValidationError);
     ctx.throw(400, 'Bad request');
   }
 });
