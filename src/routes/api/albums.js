@@ -31,7 +31,6 @@ router.patch('api.albums.update', '/:id', async (ctx) => {
     await album.update(ctx.request.body, { fields: ['name', 'artistId', 'publishedAt', 'cover'] });
     ctx.body = AlbumSerializer.serialize(album);
   } catch (ValidationError) {
-    console.log(ValidationError);
     ctx.throw(400, 'Bad request');
   }
 });
