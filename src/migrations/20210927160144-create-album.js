@@ -18,6 +18,8 @@ module.exports = {
     },
     cover: {
       type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: 'https://res.cloudinary.com/pedro-herrera/image/upload/v1637791823/istockphoto-134119615-612x612_nouk4g.jpg',
     },
 
     createdAt: {
